@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    #box{
+        position: relative;
+    }
+</style>
+    
+<body>
+    <input type="button" value="<" id="levo">
+    <input type="button" value=">" id="desno">
+
+    <hr>
+    <div id="box"></div>
+    
+    <script>
+         $(document).ready(function(){
+                let data = '[{"boja":"red", "width":"100px", "height":"100px"}, {"boja":"green", "width":"50px", "height":"100px"}, {"boja":"blue", "width":"100px", "height":"50px"}]';
+                data = JSON.parse(data);
+                //console.log(data)
+                var index = 0;
+
+            var box = document.getElementById('box');
+            box.style.height = data[0].height;
+            box.style.width = data[0].width;
+            box.style.backgroundColor = data[0].boja;  
+           
+
+                $('#levo').click(function(){
+                    if(index-1 < 0){
+                     index = data.length-1;
+                    }else{
+                        index--;
+                    }
+                    
+                    box.style.height = data[index].height;
+                    box.style.width = data[index].width;
+                    box.style.backgroundColor = data[index].boja;
+                    $('#box').css({"left":"1000px"}).animate({
+                        "left":"0px"
+                })
+                  
+               
+            })
+
+
+            $('#desno').click(function(){
+                    if(index+1 > data.length){
+                     index = 0;
+                    }else{
+                        index++;
+                    }
+                    
+                    box.style.height = data[index].height;
+                    box.style.width = data[index].width;
+                    box.style.backgroundColor = data[index].boja;
+                    $('#box').css({"left":"-1000px"}).animate({
+                        "left":"0px"
+                })
+                  
+               
+            })
+        })
+
+
+        
+
+    </script>
+
+</body>
+</html>
